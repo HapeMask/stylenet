@@ -53,7 +53,7 @@ def load_vgg(params_filename):
 
     #cnn["fc6"] = DenseLayer(cnn["pool5"], 4096, nonlinearity=lasagne.nonlinearities.rectify)
     #cnn["fc6_drop"] = lasagne.layers.DropoutLayer(cnn["fc6"], p=0.5)
-    #cnn["fc7"] = DenseLayer(cnn["fc6"], 4096, nonlinearity=lasagne.nonlinearities.rectify)
+    #cnn["fc7"] = DenseLayer(cnn["fc6_drop"], 4096, nonlinearity=lasagne.nonlinearities.rectify)
     #cnn["fc7_drop"] = lasagne.layers.DropoutLayer(cnn["fc7"], p=0.5)
 
     #cnn["prob"] = DenseLayer(cnn["fc7_drop"], 1000, nonlinearity=lasagne.nonlinearities.softmax)

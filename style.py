@@ -95,7 +95,7 @@ def transfer_style(content_img, style_img, net, alpha, verbose=False):
         if it[0] % 10 == 0:
             imsave("out/%d.png" % it[0],
                     (x.reshape(content_imgs.shape)[0] +
-                     vgg_mean[:, np.newaxis, np.newaxis]).swapaxes(0,1).swapaxes(1,2))
+                        vgg_mean[:, np.newaxis, np.newaxis]).swapaxes(0,1).swapaxes(1,2)[:,:,::-1])
         it[0] += 1
 
     it = [0]
@@ -117,8 +117,8 @@ def transfer_style(content_img, style_img, net, alpha, verbose=False):
 
 if __name__ == "__main__":
     from scipy.misc import imresize
-    content_img = imread(sys.argv[1]).astype(np.float32)
-    style_img = imresize(imread(sys.argv[2]), 0.5).astype(np.float32)
+    content_img = imread(sys.argv[1]).astype(np.float32)[:,:,::-1]
+    style_img = imresize(imread(sys.argv[2]), 0.5).astype(np.float32)[:,:,::-1]
 
     if not os.path.exists("out"):
         os.mkdir("out")
@@ -127,4 +127,4 @@ if __name__ == "__main__":
     print("Loaded VGG net.")
 
     result = transfer_style(content_img, style_img, net, alpha = 1e-2, verbose=True)
-    imsave("result.png", result)
+    imsave("result.png", result[:,:,::-1])
